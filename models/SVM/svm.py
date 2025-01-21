@@ -20,7 +20,14 @@ def svm_classify(df_music: pd.DataFrame, category:str):
     X_scaled = scaler.fit_transform(X)
     
 
-    pca = PCA(n_components=36)
+    pca = PCA()
+    X_pca = pca.fit_transform(X_scaled)
+    explained_variance_ratio = pca.explained_variance_ratio_
+    cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
+
+    # Find number of components that explain 95% of variance
+    n_components = np.argmax(cumulative_variance_ratio >= 0.95) + 1
+    pca = PCA(n_components=n_components)
     X_pca = pca.fit_transform(X_scaled)
     
 

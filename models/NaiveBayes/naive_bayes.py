@@ -18,7 +18,14 @@ def naive_bayes_classify(df_music:pd.DataFrame, category:str):
     # Scaler - standardizes each column to have a mean of 0 and a standard deviation of 1
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
-    pca = PCA(n_components=36) 
+    pca = PCA()
+    X_pca = pca.fit_transform(X_scaled)
+    explained_variance_ratio = pca.explained_variance_ratio_
+    cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
+
+    # Find number of components that explain 95% of variance
+    n_components = np.argmax(cumulative_variance_ratio >= 0.95) + 1
+    pca = PCA(n_components=n_components)
     X_pca = pca.fit_transform(X_scaled)
 
     X_train, X_test, y_train, y_test = train_test_split(X_pca, y, random_state=42, test_size=0.2, stratify=y)

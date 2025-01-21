@@ -18,7 +18,14 @@ def logistic_regression_classifier(df_music: pd.DataFrame, category: str):
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    pca = PCA(n_components=36)  
+    pca = PCA()
+    X_pca = pca.fit_transform(X_scaled)
+    explained_variance_ratio = pca.explained_variance_ratio_
+    cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
+
+    # Find number of components that explain 95% of variance
+    n_components = np.argmax(cumulative_variance_ratio >= 0.95) + 1
+    pca = PCA(n_components=n_components)
     X_pca = pca.fit_transform(X_scaled)
     y = df[category]
     X_train, X_test, y_train, y_test = train_test_split(
