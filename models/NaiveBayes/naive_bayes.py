@@ -7,9 +7,7 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-def naive_bayes_classify(df_music:pd.DataFrame, category:str):
-    df = df_music.drop(columns=["title"])
-    df = df[df[category].isin([0, 1])]
+def naive_bayes_classify(df:pd.DataFrame, category:str):
 
     feature_cols = df.select_dtypes(include=[np.number]).columns
     X = df[feature_cols]

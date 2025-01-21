@@ -6,11 +6,7 @@ from sklearn.decomposition import PCA
 import pandas as pd
 import numpy as np
 
-def logistic_regression_classifier(df_music: pd.DataFrame, category: str):
-    
-    df = df_music.drop(columns=["title"])
-    df = df[df[category].isin([0, 1])]
-
+def logistic_regression_classifier(df: pd.DataFrame, category: str):
 
     feature_cols = df.select_dtypes(include=[np.number]).columns
     X = df[feature_cols]

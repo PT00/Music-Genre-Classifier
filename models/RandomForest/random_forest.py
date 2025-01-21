@@ -12,12 +12,9 @@ def show_first_ten_rows(file_path='../../data/processed/music_features.csv'):
     print(df.head(10))
 
 
-def random_forest_classify(df_music: pd.DataFrame, category:str):
-    df = df_music.drop(columns = ["title"])
-
-    df = df[df[category].isin([0, 1])]
-
-    feature_cols = df_music.select_dtypes(include=[np.number]).columns
+def random_forest_classify(df: pd.DataFrame, category:str):
+ 
+    feature_cols = df.select_dtypes(include=[np.number]).columns
     X = df[feature_cols]
     y = df[category]
 
