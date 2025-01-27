@@ -28,8 +28,8 @@ class Pipeline:
     #, 'pop', 'classical', 'blues', 'hip-hop', 'reggae', 'country', 'metal', 'techno', 'jazz'
     def __init__(self, df_music):
         self.CATEGORIES = ['rock', 'pop', 'classical', 'blues', 'hip-hop', 'reggae', 'country', 'metal', 'techno', 'jazz']
-        self.MODELS_NAMES = ["knn", "lr", "nb", "rf", "svm"] # arrays used for models loading
-        self.MODELS_FUN = [knn_classify, logistic_regression_classifier, naive_bayes_classify, random_forest_classify, svm_classify]
+        self.MODELS_NAMES = ["knn", "lr", "nb", "rf", "svm", "xgboost"] # arrays used for models loading
+        self.MODELS_FUN = [knn_classify, logistic_regression_classifier, naive_bayes_classify, random_forest_classify, svm_classify, ]
         
         self.df_music = df_music
         # dictionary of models
